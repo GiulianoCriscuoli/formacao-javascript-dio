@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="calculadora.css">
+    <title>Calculadora</title>
+</head>
+<body>
+
+    <main class="calculator">
+        <div id="display">
+            <button type="button" class="clear" onclick="clearAll()">Limpar</button>
+            
+            <input type="text" value="" name="display" id="display" diabled>
+        </div>
+
+        <div class="buttons">
+            <section class="first">
+                <button  class="button"  value="1">7</button>
+                <button  class="button"  value="8">8</button>
+                <button  class="button"  value="9">9</button>
+                <button  class="button"  value="+">+</button>
+            </section>
+        </div>
+        <div class="buttons">
+            <section class="second">
+                <button  class="button"  value="7">7</button>
+                <button  class="button"  value="8">8</button>
+                <button  class="button"  value="6">6</button>
+                <button  class="button"  value="-">-</button>
+            </section>
+        </div>
+        <div class="buttons">
+            <section class="third">
+                <button  class="button"  value="1">1</button>
+                <button  class="button"  value="2">2</button>
+                <button  class="button"  value="3">3</button>
+                <button  class="button"  value="*">*</button>
+            </section>
+        </div>
+
+        <div class="buttons">
+            <section class="fourth">
+                <button  class="button"  value="0">0</button>
+                <button  class="button"  value=".">.</button>
+                <button  class="button"  value="/">/</button>
+                <button  class="button"  onclick="result()" value="=">=</button>
+            </section>
+        </div>
+    </main>
+    <script src="calculadora.js"></script>
+</body>
+</html>
