@@ -1,15 +1,19 @@
+var offset = 0;
+var limit = 10;
 
-const offset = 0;
-const limit = 10;
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+function incrementOffset() {
+    return offset += limit;
+}
 
-async function fetchAllPokemons() {
+export async function fetchAllPokemons() {
+    const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+
     const response = await fetch(url, {
         method: 'GET'
     });
     return response.json();
 }
 
-export default {
-    fetchAllPokemons
+export {
+    incrementOffset
 }
