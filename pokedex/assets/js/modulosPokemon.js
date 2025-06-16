@@ -3,6 +3,8 @@ import { fetchAllPokemons, incrementOffset} from './api.js';
 const pokemonArea      = document.querySelector('.pokemons');
 const paginationButton = document.querySelector('#pagination');
 
+const maxPokemons = 50;
+
 async function detailPokemon(pokemons) {
     let detail = pokemons.map(async pokemon => {
       return fetch(pokemon.url)
@@ -44,11 +46,20 @@ async function getAllPokemons(pokemons) {
     }).join('');
 
     pokemonArea.insertAdjacentHTML('beforeend', listPokemons);
+
+   let currentQuantity = document.querySelectorAll('.pokemon').length;
+
+   return currentQuantity;
+
 }
 
 async function loadPokemons() {
     const data = await fetchAllPokemons();
-    await getAllPokemons(data.results);
+    let currentQuantity =  await getAllPokemons(data.results);
+
+    if (maxPokemons <= currentQuantity) {
+        paginationButton.style.display = 'none';
+    }
   }
   
 paginationButton.addEventListener('click', async () => {
