@@ -1,13 +1,10 @@
-const offset = 0;
-const limit = 10;
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+import method  from './modulosPokemon.js';
+import api from './api.js';
 
-fetch(url, {
-    method: 'GET',
-    mode: 'no-cors'
-}).then((response) => {
-    console.log(response);
-});
+api.fetchAllPokemons().then( response => {
+    let allPokemons = response.results;
 
-const x = 10 + 10;
-console.log(x);
+    method.getAllPokemons(allPokemons)
+    method.detailPokemon(allPokemons)
+})
+.catch( error => console.error());
