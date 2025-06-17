@@ -1,5 +1,5 @@
 var offset = 0;
-var limit = 10;
+var limit  = 10;
 
 function incrementOffset() {
     return offset += limit;
@@ -14,6 +14,13 @@ export async function fetchAllPokemons() {
     return response.json();
 }
 
+async function fetchOnePokemon(id) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
+
 export {
-    incrementOffset
+    incrementOffset,
+    fetchOnePokemon
 }

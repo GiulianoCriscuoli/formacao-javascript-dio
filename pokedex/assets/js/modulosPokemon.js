@@ -1,9 +1,9 @@
-import { fetchAllPokemons, incrementOffset} from './api.js';
+import { fetchAllPokemons, incrementOffset, fetchOnePokemon} from './api.js';
 
 const pokemonArea      = document.querySelector('.pokemons');
 const paginationButton = document.querySelector('#pagination');
-
-const maxPokemons = 50;
+const modal            = document.querySelector('.modal-area');
+const maxPokemons      = 151;
 
 async function detailPokemon(pokemons) {
     let detail = pokemons.map(async pokemon => {
@@ -30,7 +30,7 @@ async function getAllPokemons(pokemons) {
             return `<li class="type">${typeInfo.type.name}</li>`;
           }).join('');
 
-        return `<li class="pokemon">
+        return `<li data-id="${detail[i].id}" class="pokemon">
             <span class="number">${detail[i].id}</span>
             <span class="name">${name}</span>
             
@@ -50,7 +50,6 @@ async function getAllPokemons(pokemons) {
    let currentQuantity = document.querySelectorAll('.pokemon').length;
 
    return currentQuantity;
-
 }
 
 async function loadPokemons() {
@@ -60,12 +59,43 @@ async function loadPokemons() {
     if (maxPokemons <= currentQuantity) {
         paginationButton.style.display = 'none';
     }
-  }
+}
+
+async function getOnePokemon(id) {
+    const response = await fetchOnePokemon(id)
+    return response;
+
+}
   
 paginationButton.addEventListener('click', async () => {
     incrementOffset();
     await loadPokemons();
 });
+
+pokemonArea.addEventListener('click', async (e) => {
+    const li = e.target.closest('li.pokemon')
+    const id = li.dataset.id;
+    const pokemonId = getOnePokemon(id);
+
+    renderPokemonDetail(pokemonId)
+    openModal()
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+});
+
+function openModal() {
+    modal.classList.remove('hidden');
+    setTimeout(() => modal.classList.add('active'), 10);
+}
+
+function closeModal() {
+    modal.classList.remove('active');
+    setTimeout(() => modal.classList.add('hidden'), 10);
+}
+
+function renderPokemonDetail(pokemon) {}
 
 export default { 
     getAllPokemons
