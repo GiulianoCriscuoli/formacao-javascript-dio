@@ -121,11 +121,12 @@ ol.pokemons {
 }
 
 .modal {
-    height: 200px;
+    min-height: 200px;
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 2rem;
 }
 
 .hidden{
@@ -136,6 +137,84 @@ ol.pokemons {
     opacity: 1;
     pointer-events: all;
 }
+
+/* Quando ativa */
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  /* Conteúdo da modal */
+  .detail-modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #444;
+  }
+  
+  .close-modal:hover {
+    color: #000;
+  }
+  
+
+  .detail-modal .nome-pokemon {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .detail-modal img {
+    max-width: 180px;
+    margin: 10px 0;
+  }
+  
+  .detail-modal .info {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .detail-modal .types {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  
+  .detail-modal .types li {
+    background: #eee;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
 
 @media screen and (min-width: 992px) {
     .content {

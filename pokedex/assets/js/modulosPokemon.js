@@ -3,6 +3,7 @@ import { fetchAllPokemons, incrementOffset, fetchOnePokemon} from './api.js';
 const pokemonArea      = document.querySelector('.pokemons');
 const paginationButton = document.querySelector('#pagination');
 const modal            = document.querySelector('.modal-area');
+const modalContent     = document.querySelector('.detail-modal')
 const maxPokemons      = 151;
 
 async function detailPokemon(pokemons) {
@@ -64,7 +65,6 @@ async function loadPokemons() {
 async function getOnePokemon(id) {
     const response = await fetchOnePokemon(id)
     return response;
-
 }
   
 paginationButton.addEventListener('click', async () => {
@@ -75,14 +75,20 @@ paginationButton.addEventListener('click', async () => {
 pokemonArea.addEventListener('click', async (e) => {
     const li = e.target.closest('li.pokemon')
     const id = li.dataset.id;
-    const pokemonId = getOnePokemon(id);
+    const pokemonId = await getOnePokemon(id);
 
-    renderPokemonDetail(pokemonId)
     openModal()
+    renderPokemonDetail(pokemonId)
 });
 
 modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
 });
 
 function openModal() {
@@ -95,7 +101,24 @@ function closeModal() {
     setTimeout(() => modal.classList.add('hidden'), 10);
 }
 
-function renderPokemonDetail(pokemon) {}
+function renderPokemonDetail(pokemon) {
+   ;  
+    const name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    const image = pokemon.sprites.other.dream_world.front_default;
+    const height = pokemon.height;
+    const weight = pokemon.weight;
+
+    modalContent.innerHTML = `
+      <div class="nome-pokemon">${name}</div>
+      <div class="image">
+        <img src="${image}" alt="${name}">
+      </div>
+      <div class="info">
+        <p>Altura: ${height / 10} m</p>
+        <p>Peso: ${weight / 10} kg</p>
+      </div>
+    `;
+  }
 
 export default { 
     getAllPokemons
