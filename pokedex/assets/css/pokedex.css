@@ -138,15 +138,13 @@ ol.pokemons {
     pointer-events: all;
 }
 
-/* Quando ativa */
 .modal-overlay.active {
     opacity: 1;
     pointer-events: auto;
   }
   
-  /* Conteúdo da modal */
   .detail-modal {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 12px;
     padding: 20px;
     max-width: 400px;

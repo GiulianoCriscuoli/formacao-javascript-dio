@@ -102,7 +102,6 @@ function closeModal() {
 }
 
 function renderPokemonDetail(pokemon) {
-   ;  
     const name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     const image = pokemon.sprites.other.dream_world.front_default;
     const height = pokemon.height;
